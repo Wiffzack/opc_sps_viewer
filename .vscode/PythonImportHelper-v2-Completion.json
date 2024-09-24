@@ -1,0 +1,125 @@
+[
+    {
+        "label": "*",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "node",
+        "importPath": "platform",
+        "description": "platform",
+        "isExtraImport": true,
+        "detail": "platform",
+        "documentation": {}
+    },
+    {
+        "label": "opcua",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "opcua",
+        "description": "opcua",
+        "detail": "opcua",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "os,sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os.sys",
+        "description": "os.sys",
+        "detail": "os.sys",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "root",
+        "kind": 5,
+        "importPath": "graph",
+        "description": "graph",
+        "peekOfCode": "root = Tk()  # create a root widget\nroot.title(\"Tk Example\")\nroot.configure(background=\"yellow\")\nroot.minsize(200, 200)  # width, height\nroot.maxsize(500, 500)\nroot.geometry(\"300x300+50+50\")  # width x height + x + y\nroot.mainloop()",
+        "detail": "graph",
+        "documentation": {}
+    },
+    {
+        "label": "Window",
+        "kind": 6,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "class Window(Frame):\n    def __init__(self, master=None):\n        Frame.__init__(self, master)        \n        self.master = master\n        menu = Menu(self.master)\n        self.master.config(menu=menu)\n        fileMenu = Menu(menu)\n        fileMenu.add_command(label=\"Item\")\n        #fileMenu.add_command(label=\"Exit\", command=self.exitProgram)\n        menu.add_cascade(label=\"File\", menu=fileMenu)",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "root",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "root = Tk()\napp = Window(root)\nroot.wm_title(\"Tkinter button\")\nroot.geometry(\"320x200\")\nroot.mainloop()",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "app = Window(root)\nroot.wm_title(\"Tkinter button\")\nroot.geometry(\"320x200\")\nroot.mainloop()",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "OPC_Client",
+        "kind": 6,
+        "importPath": "opc_client",
+        "description": "opc_client",
+        "peekOfCode": "class OPC_Client:\n    \"\"\"\n    client is a list of all connections identified by the ip\n    \"\"\"\n    client = {}\n    node: any = {}\n    def is_connection_alive(self,client):\n        try:\n            # Attempt a small operation to check if the connection is alive\n            client.get_objects_node()",
+        "detail": "opc_client",
+        "documentation": {}
+    },
+    {
+        "label": "system_name",
+        "kind": 5,
+        "importPath": "opc_client",
+        "description": "opc_client",
+        "peekOfCode": "system_name = \"\"\ntry:\n    system_name = os.getenv('HOSTNAME')\nexcept:\n    import socket\n    system_name = (socket.gethostname())\nclass OPC_Client:\n    \"\"\"\n    client is a list of all connections identified by the ip\n    \"\"\"",
+        "detail": "opc_client",
+        "documentation": {}
+    },
+    {
+        "label": "client1",
+        "kind": 5,
+        "importPath": "test_connect",
+        "description": "test_connect",
+        "peekOfCode": "client1 = opcua.Client(\"opc.tcp://192.168.137.7:4849\")\n#client1.set_user(\"admin\")\n#client1.set_password(\"wago\")\nclient1.connect()\nprint (\"connected \")\nclient1.disconnect()",
+        "detail": "test_connect",
+        "documentation": {}
+    }
+]

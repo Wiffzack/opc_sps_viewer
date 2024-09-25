@@ -35,6 +35,12 @@ class OPC_Client:
         self.password = password
         self.connect_string = connect_string
 
+    def get_node(self):
+        if (self.connect_string):
+            self.node[self.ip] = self.client[self.ip].get_node(self.connect_string)
+        else:
+            print ("No connection String supplied!")
+
     def connect(self):
         try:
             self.client[self.ip] = opcua.Client("opc.tcp://" + self.ip + ":4840")
@@ -66,7 +72,7 @@ class OPC_Client:
         # Check if connection work
         assert(self.is_connection_alive(self.client[self.ip]) == True)
 
-        self.node[self.ip] = self.client[self.ip].get_node(self.connect_string)
+    
 
     def get_children(self):
         if self.node:

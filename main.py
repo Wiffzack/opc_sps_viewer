@@ -5,25 +5,69 @@ from tkinter.ttk import *
 
 root = Tk()
 
+# First add grafana and prometheus 
+# later maybe mongodb postgres etc ...
+def okay(text):
+    print ("sdsf")
+    print (text)
+
+class NewWindow(Toplevel):
+    
+    def __init__(self, master = None):
+        
+        super().__init__(master = master)
+        self.title("New Window")
+        self.geometry("200x200")
+        label = Label(self, text ="This is a new Window")
+        label.pack()
+        e = Entry(self)
+        e.pack()
+        e.place(x=5, y=50) 
+        e.focus_set()
+        b = Button(self,text='finish',command=lambda: okay((e.get())))
+        b.place(x=5, y=100) 
+        b.bind('<Return>', okay)
+
 class Window(Frame):
 
-    def openNewWindow(self):
-     
+    def print_text(self,e):
+        print ("called")
+        print (e.get())
+
+    def replace_ip(self,node_ip="192.168.0.1"):
+        replacements = {'placeholder_ip':node_ip}
+
+        with open('ssl.conf') as infile, open('ssl.conf', 'w') as outfile:
+            for line in infile:
+                for src, target in replacements.items():
+                    line = line.replace(src, target)
+                outfile.write(line)
+            
+    def return_pressed(event):
+        print('Return key pressed.')
+
+    def createOPCServer(self):
         # Toplevel object which will 
         # be treated as a new window
         newWindow = Toplevel(root)
-
         # sets the title of the
         # Toplevel widget
         newWindow.title("Settings")
-
         # sets the geometry of toplevel
-        newWindow.geometry("200x800")
-
+        newWindow.geometry("200x600")
+        e = Entry(newWindow)
+        e.pack()
+        e.place(x=5, y=50) 
+        e.focus_set()
+        b = Button(newWindow,text='finish',command=print(e.get()))
+        b.bind('<Return>', self.return_pressed)
+        #b.pack(side='bottom')
+        b.place(x=5, y=100) 
         # A Label widget to show in toplevel
-        Label(newWindow, 
-                text ="This is a new window").pack()
 
+    
+        Label(newWindow, 
+                text ="OPC Server Settings").pack()
 
     def check_openssl():
         return which("openssl")
@@ -42,8 +86,8 @@ class Window(Frame):
         self.master.config(menu=menu)
 
         fileMenu = Menu(menu)
-        fileMenu.add_command(label="Item")
-        #fileMenu.add_command(label="Exit", command=self.exitProgram)
+        fileMenu.add_command(label="Add OPC Server",  command=self.createOPCServer)
+        fileMenu.add_command(label="Add OPC Client",  command=self.createOPCServer)
         menu.add_cascade(label="File", menu=fileMenu)
 
         editMenu = Menu(menu)
@@ -53,14 +97,25 @@ class Window(Frame):
         # widget can take all window
         self.pack(fill=BOTH, expand=1)
 
+        opserver = Button(self, text="Add OPC Server", command=self.createOPCServer)
+        opserver.place(x=5, y=25) 
+
+        opcclient = Button(self, text="Add OPC Client", command=self.createOPCServer)
+        opcclient.place(x=5, y=50)  
+
+        btn = Button(root, text ="Click to open a new window")
+        btn.bind("<Button>", lambda e: NewWindow(root))    
+        btn.place(x=5, y=75)  
+        btn.pack(pady = 10)
+
         # create button, link it to clickExitButton()
-        certButton = Button(self, text="Create Certificate", command=self.create_cert)
+        """         certButton = Button(self, text="Create Certificate", command=self.create_cert)
         if(self.check_openssl == None):
-            certButton["state"] = "disabled"
+        certButton["state"] = "disabled"
         certButton.place(x=5, y=5)
 
         settings = Button(self, text="New window", command=self.openNewWindow)
-        settings.place(x=5, y=50)        
+        settings.place(x=5, y=50)   """      
 
     def clickExitButton(self):
         exit()
